@@ -1,0 +1,33 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  # 推送到 main 分支时触发
+  push:
+    branches:
+      - main
+    paths:
+      - 'application/samples/peripheral/smart_car/前端/**'
+  # 支持手动触发部署
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: smart-car-udp
+          directory: application/samples/peripheral/smart_car/前端
+          # HTML 静态站点无需构建命令
+          buildCommand: ''
+          # 指定入口文件
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
