@@ -1,8 +1,0 @@
-# 安全响应头
-/*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  X-XSS-Protection: 1; mode=block
-  Referrer-Policy: strict-origin-when-cross-origin
-  # 允许 WebSocket 连接（用于连接代理服务器）
-  Permissions-Policy: websocket=(self)
